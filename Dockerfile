@@ -5,7 +5,7 @@ RUN pip install pyyaml pyaes
 ARG VCS_REF
 ARG BUILD_DATE
 
-ENV HELM_LATEST_VERSION="v2.15.2"
+ENV HELM_LATEST_VERSION="v2.14.3"
 
 RUN apk add --update ca-certificates \
  && apk add --update -t deps wget git openssl bash \
@@ -16,7 +16,7 @@ RUN apk add --update ca-certificates \
  && rm /var/cache/apk/* \
  && rm -f /helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz
  
-ENV KUBE_LATEST_VERSION="v1.16.2"
+ENV KUBE_LATEST_VERSION="v1.14.7"
 
 RUN apk add --update -t deps curl \
  && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
