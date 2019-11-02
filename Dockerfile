@@ -1,6 +1,6 @@
 FROM python:alpine3.10
 
-RUN pip install pyyaml
+RUN pip install pyyaml pyaes
 
 ARG VCS_REF
 ARG BUILD_DATE
