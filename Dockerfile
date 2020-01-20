@@ -5,16 +5,14 @@ RUN pip install pyyaml pyaes
 ARG VCS_REF
 ARG BUILD_DATE
 
-ENV HELM_LATEST_VERSION="v2.15.2"
-
-RUN apk add --update ca-certificates \
- && apk add --update -t deps wget git openssl bash \
- && wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz \
- && tar -xf helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz \
- && mv linux-amd64/helm /usr/local/bin \
+RUN apk add --update ca-certificates curl bash openssl \
+ && apk add --update -t deps wget git  \
  && apk del --purge deps \
- && rm /var/cache/apk/* \
- && rm -f /helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz
+ && rm /var/cache/apk/* 
+
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+ && chmod 700 get_helm.sh \
+ && ./get_helm.sh
  
 ENV KUBE_LATEST_VERSION="v1.16.2"
 
